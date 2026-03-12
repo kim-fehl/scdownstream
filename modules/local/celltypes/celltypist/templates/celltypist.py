@@ -11,6 +11,10 @@ import pandas as pd
 import scanpy as sc
 import celltypist
 from celltypist import models as ct_models
+from threadpoolctl import threadpool_limits
+
+threadpool_limits(int("${task.cpus}"))
+sc.settings.n_jobs = int("${task.cpus}")
 
 def format_yaml_like(data: dict, indent: int = 0) -> str:
     """Formats a dictionary to a YAML-like string.

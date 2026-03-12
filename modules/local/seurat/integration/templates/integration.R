@@ -17,7 +17,7 @@ Sys.setenv(
 )
 
 if (num_threads > 1L && requireNamespace("future", quietly = TRUE)) {
-  future_strategy <- ifelse(.Platform$OS.type == "unix",
+  future_strategy <- ifelse(.Platform\$OS.type == "unix",
                             "multicore", "multisession")
   future::plan(future_strategy, workers = num_threads)
   on.exit(future::plan("sequential"), add = TRUE)

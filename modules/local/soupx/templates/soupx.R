@@ -4,6 +4,23 @@ library(SoupX)
 library(anndataR)
 library(Seurat)
 
+num_threads <- max(1L, as.integer("${task.cpus}"))
+Sys.setenv(
+    OMP_NUM_THREADS = num_threads,
+    OPENBLAS_NUM_THREADS = num_threads,
+    MKL_NUM_THREADS = num_threads,
+    BLIS_NUM_THREADS = num_threads,
+    VECLIB_MAXIMUM_THREADS = num_threads,
+    RCPP_PARALLEL_NUM_THREADS = num_threads
+)
+
+if (num_threads > 1L && requireNamespace("future", quietly = TRUE)) {
+    future_strategy <- ifelse(.Platform\$OS.type == "unix",
+                              "multicore", "multisession")
+    future::plan(future_strategy, workers = num_threads)
+    on.exit(future::plan("sequential"), add = TRUE)
+}
+
 # Read the AnnData objects and convert directly to Seurat
 adata <- read_h5ad("${h5ad}")
 seu <- adata\$as_Seurat()

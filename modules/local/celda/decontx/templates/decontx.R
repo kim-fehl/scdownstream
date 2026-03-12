@@ -3,6 +3,25 @@
 library(anndataR)
 library(celda)
 
+num_threads <- max(1L, as.integer("${task.cpus}"))
+Sys.setenv(
+    OMP_NUM_THREADS = num_threads,
+    OPENBLAS_NUM_THREADS = num_threads,
+    MKL_NUM_THREADS = num_threads,
+    BLIS_NUM_THREADS = num_threads,
+    VECLIB_MAXIMUM_THREADS = num_threads,
+    RCPP_PARALLEL_NUM_THREADS = num_threads
+)
+
+if (num_threads > 1L && requireNamespace("BiocParallel", quietly = TRUE)) {
+    bp_param <- if (.Platform\$OS.type == "unix") {
+        BiocParallel::MulticoreParam(workers = num_threads)
+    } else {
+        BiocParallel::SnowParam(workers = num_threads, type = "SOCK")
+    }
+    BiocParallel::register(bp_param, default = TRUE)
+}
+
 # Read the AnnData object
 adata <- read_h5ad("${h5ad}")
 

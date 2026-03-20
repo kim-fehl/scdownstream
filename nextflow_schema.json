@@ -152,8 +152,8 @@
                     "type": "string",
                     "default": "scvi",
                     "description": "Specify the tool to use for integration",
-                    "help_text": "If you want to use multiple tools, separate them with a comma. Available methods are: scvi, scanvi, harmony, bbknn, combat, seurat",
-                    "pattern": "^((scvi|scanvi|harmony|bbknn|combat|seurat|scimilarity)(,(scvi|scanvi|harmony|bbknn|combat|seurat|scimilarity))*)?$"
+                    "help_text": "If you want to use multiple tools, separate them with a comma. Available methods are: scvi, scanvi, symphony, harmony, bbknn, combat, seurat, scimilarity",
+                    "pattern": "^((scvi|scanvi|symphony|harmony|bbknn|combat|seurat|scimilarity)(,(scvi|scanvi|symphony|harmony|bbknn|combat|seurat|scimilarity))*)?$"
                 },
                 "integration_hvgs": {
                     "type": "integer",
@@ -181,6 +181,14 @@
                     "description": "Path to a pre-trained scANVI model, only relevant if scANVI is selected in `integration_methods`. If provided, the model will be used for integration. Otherwise, a new model will be trained.",
                     "help_text": "The file should be in the .pt format.",
                     "pattern": "^\\S+\\.pt$",
+                    "exists": true
+                },
+                "symphony_model": {
+                    "type": "string",
+                    "format": "file-path",
+                    "description": "Path to a pre-trained Symphony reference, only relevant if Symphony is selected in `integration_methods`. If provided, the reference will be used for mapping. Otherwise, a new reference will be built from the current data.",
+                    "help_text": "The file should be a .h5ad file created by the Symphony module in this pipeline, which uses the Python symphonypy implementation.",
+                    "pattern": "^\\S+\\.h5ad$",
                     "exists": true
                 },
                 "scimilarity_model": {
@@ -220,7 +228,7 @@
                     "type": "string",
                     "description": "The keys in the obsm of the base AnnData object that contain the embeddings (without leading `X_`). Required if `input` is not provided - otherwise it is ignored.",
                     "help_text": "If the `input` parameter is not provided (no new data to add), integration will not be performed. In order to be able to utilize existing integration results, you need to provide the keys in the obsm of the base AnnData object that contain the embeddings (without leading `X_`).",
-                    "pattern": "^((scvi|scanvi|harmony|bbknn|combat|seurat)(,(scvi|scanvi|harmony|bbknn|combat|seurat))*)?$"
+                    "pattern": "^((scvi|scanvi|symphony|harmony|bbknn|combat|seurat)(,(scvi|scanvi|symphony|harmony|bbknn|combat|seurat))*)?$"
                 }
             }
         },

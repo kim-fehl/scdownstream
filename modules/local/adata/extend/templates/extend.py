@@ -19,20 +19,12 @@ obsp_paths = sorted(Path("obsp/").glob("*"))
 uns_paths = sorted(Path("uns/").glob("*"))
 layers_paths = sorted(Path("layers/").glob("*"))
 
-def load_pickle_or_csv(path):
-    if path.suffix == ".pkl":
-        return pd.read_pickle(path)
-    elif path.suffix == ".csv":
-        return pd.read_csv(path, index_col = 0)
-    else:
-        raise ValueError(f"Unsupported file extension: {path}")
-
 for path in obs_paths:
-    df = load_pickle_or_csv(path).reindex(adata.obs_names)
+    df = pd.read_pickle(path).reindex(adata.obs_names)
     adata.obs = pd.concat([adata.obs, df], axis=1)
 
 for path in var_paths:
-    df = load_pickle_or_csv(path).reindex(adata.var_names)
+    df = pd.read_pickle(path).reindex(adata.var_names)
     adata.var = pd.concat([adata.var, df], axis=1)
 
 for path in obsm_paths:

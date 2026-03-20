@@ -56,6 +56,7 @@ workflow NFCORE_SCDOWNSTREAM {
     integration_excluded_genes    //   value: string
     scvi_model                    //   value: string
     scanvi_model                  //   value: string
+    symphony_model                //   value: string
     scvi_categorical_covariates   //   value: string
     scvi_continuous_covariates    //   value: string
     scimilarity_model             //   value: string
@@ -107,6 +108,7 @@ workflow NFCORE_SCDOWNSTREAM {
         integration_excluded_genes,
         scvi_model,
         scanvi_model,
+        symphony_model,
         scvi_categorical_covariates,
         scvi_continuous_covariates,
         scimilarity_model,
@@ -193,6 +195,7 @@ workflow {
         params.integration_excluded_genes,
         params.scvi_model,
         params.scanvi_model,
+        params.symphony_model,
         params.scvi_categorical_covariates,
         params.scvi_continuous_covariates,
         params.scimilarity_model,

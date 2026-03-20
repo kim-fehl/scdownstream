@@ -39,6 +39,14 @@
 
   > Butler A, Hoffman P, Smibert P, Papalexi E, Satija R. Integrating single-cell transcriptomic data across different conditions, technologies, and species. Nat Biotechnol. 2018 Apr;36(5):411-420. doi: 10.1038/nbt.4096. Epub 2018 Mar 12. PubMed PMID: 29608179; PubMed Central PMCID: PMC5965097.
 
+- [Symphony](https://pubmed.ncbi.nlm.nih.gov/34620862/)
+
+  > Kang JB, Nathan A, Weinand K, Zhang F, Millard N, Rumker L, Moody DB, Korsunsky I, Raychaudhuri S, Brown FD, Hafler DA, Korn T, Kuchroo VK, Sharpe AH, Haining WN, Raj A, Regev A, Satija R, Raychaudhuri S. Efficient and precise single-cell reference atlas mapping with Symphony. Nat Commun. 2021 Oct 6;12(1):5890. doi: 10.1038/s41467-021-25957-x. PubMed PMID: 34620862.
+
+- [symphonypy](https://github.com/pinellolab/symphonypy)
+
+  > Python implementation used by the pipeline for Symphony reference building and mapping. The original Symphony method is cited above.
+
 - [celldex](https://pubmed.ncbi.nlm.nih.gov/30643263/)
 
   > Aran D, Looney AP, Liu L, Wu E, Fong V, Hsu A, Chak S, Naikawadi RP, Wolters PJ, Abate AR, Butte AJ, Bhattacharya M (2019). “Reference-based analysis of lung single-cell sequencing reveals a transitional profibrotic macrophage.” Nat. Immunol., 20, 163-172. doi:10.1038/s41590-018-0276-y.

@@ -36,6 +36,7 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
       - [BBKNN](https://github.com/Teichlab/bbknn)
       - [Combat](https://scanpy.readthedocs.io/en/latest/api/generated/scanpy.pp.combat.html)
       - [Seurat](https://satijalab.org/seurat/articles/integration_introduction)
+      - [Symphony](https://github.com/immunogenomics/symphony) via the Python [symphonypy](https://github.com/pinellolab/symphonypy) implementation
 3. Cell type annotation
    - [celltypist](https://www.celltypist.org/)
    - [singleR](https://www.bioconductor.org/packages/release/bioc/html/SingleR.html)
@@ -84,7 +85,8 @@ The pipeline is built using [Nextflow](https://www.nextflow.io/) and processes d
       - `*.h5ad`: The h5ad file that is used as input to the integration tools.
       - `*.rds`: RDS version of the h5ad file.
     - `${tool}`
-      - `*.h5ad/*.rds`: The integrated h5ad or rds file.
+      - `*.h5ad/*.rds`: The integrated h5ad file and, for methods that support reuse, the saved reference/model artifact.
+        For `symphony`, the saved reference artifact is an `.h5ad` file produced by the Python `symphonypy` implementation.
       - `X_${tool}.pkl`: Low-dimensional representation of the integrated data.
 
 </details>

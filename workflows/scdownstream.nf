@@ -54,6 +54,7 @@ workflow SCDOWNSTREAM {
     integration_excluded_genes    //   value: string
     scvi_model                    //   value: string
     scanvi_model                  //   value: string
+    symphony_model                //   value: string
     scvi_categorical_covariates   //   value: string
     scvi_continuous_covariates    //   value: string
     scimilarity_model             //   value: string
@@ -170,6 +171,7 @@ workflow SCDOWNSTREAM {
                 integration_excluded_genes,
                 scvi_model,
                 scanvi_model,
+                symphony_model,
                 scvi_categorical_covariates,
                 scvi_continuous_covariates,
                 scimilarity_model,

@@ -6,6 +6,7 @@ include { SCANPY_HARMONY     } from '../../../modules/local/scanpy/harmony'
 include { SCANPY_BBKNN       } from '../../../modules/local/scanpy/bbknn'
 include { SCANPY_COMBAT      } from '../../../modules/local/scanpy/combat'
 include { SEURAT_INTEGRATION } from '../../../modules/local/seurat/integration'
+include { SEURAT_SYMPHONY    } from '../../../modules/local/seurat/symphony'
 include { ADATA_READRDS      } from '../../../modules/local/adata/readrds'
 include { SCIMILARITY        } from '../scimilarity'
 
@@ -18,6 +19,7 @@ workflow INTEGRATE {
     methods                     // list of string
     scvi_model                  // path
     scanvi_model                // path
+    symphony_model              // path
     scvi_categorical_covariates // list of string
     scvi_continuous_covariates  // list of string
     scimilarity_model           // path
@@ -103,6 +105,19 @@ workflow INTEGRATE {
         ch_integrations = ch_integrations.mix(SCVITOOLS_SCANVI.out.h5ad)
         ch_obs = ch_obs.mix(SCVITOOLS_SCANVI.out.obs)
         ch_obsm = ch_obsm.mix(SCVITOOLS_SCANVI.out.obsm)
+    }
+
+    if (methods.contains('symphony')) {
+        SEURAT_SYMPHONY (
+            ch_h5ad_hvg.map { _meta, h5ad -> [[id: 'symphony'], h5ad] },
+            symphony_model
+                ? channel.value([[id: 'symphony'], symphony_model])
+                : [[], []],
+            "batch"
+        )
+        ch_versions = ch_versions.mix(SEURAT_SYMPHONY.out.versions)
+        ch_integrations = ch_integrations.mix(SEURAT_SYMPHONY.out.h5ad)
+        ch_obsm = ch_obsm.mix(SEURAT_SYMPHONY.out.obsm)
     }
 
     if (methods.contains('harmony')) {

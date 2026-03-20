@@ -27,9 +27,10 @@ nextflow_workflow {
                 input[4] = ['harmony']
                 input[5] = null
                 input[6] = null
-                input[7] = []
+                input[7] = null
                 input[8] = []
-                input[9] = null
+                input[9] = []
+                input[10] = null
                 """
             }
         }
@@ -59,9 +60,10 @@ nextflow_workflow {
                 input[4] = ['harmony']
                 input[5] = null
                 input[6] = null
-                input[7] = []
+                input[7] = null
                 input[8] = []
-                input[9] = null
+                input[9] = []
+                input[10] = null
                 """
             }
         }
@@ -96,9 +98,10 @@ nextflow_workflow {
                 input[4] = ['bbknn']
                 input[5] = null
                 input[6] = null
-                input[7] = []
+                input[7] = null
                 input[8] = []
-                input[9] = null
+                input[9] = []
+                input[10] = null
                 """
             }
         }
@@ -128,9 +131,10 @@ nextflow_workflow {
                 input[4] = ['bbknn']
                 input[5] = null
                 input[6] = null
-                input[7] = []
+                input[7] = null
                 input[8] = []
-                input[9] = null
+                input[9] = []
+                input[10] = null
                 """
             }
         }
@@ -162,9 +166,10 @@ nextflow_workflow {
                 input[4] = ['combat']
                 input[5] = null
                 input[6] = null
-                input[7] = []
+                input[7] = null
                 input[8] = []
-                input[9] = null
+                input[9] = []
+                input[10] = null
                 """
             }
         }
@@ -194,19 +199,52 @@ nextflow_workflow {
                 input[4] = ['combat']
                 input[5] = null
                 input[6] = null
-                input[7] = []
+                input[7] = null
                 input[8] = []
-                input[9] = null
+                input[9] = []
+                input[10] = null
                 """
             }
         }
 
         then {
             assert workflow.success
-            assert snapshot(
-                workflow.out.versions
-            ).match()
-            assert "X_emb" in anndata(workflow.out.integrations[0][1]).obsm
+            assert snapshot(workflow.out).match()
+        }
+
+    }
+
+    test("Should run without failures - symphony - stub") {
+
+        options '-stub'
+
+        when {
+            params {
+                outdir = "$outputDir"
+            }
+            workflow {
+                """
+                input[0] = channel.of([
+                    [id: 'test'],
+                    file(params.pipelines_testdata_base_path + '/anndata-variations/batch_correct_name.h5ad', checkIfExists: true)
+                ])
+                input[1] = false
+                input[2] = 2000
+                input[3] = []
+                input[4] = ['symphony']
+                input[5] = null
+                input[6] = null
+                input[7] = null
+                input[8] = []
+                input[9] = []
+                input[10] = null
+                """
+            }
+        }
+
+        then {
+            assert workflow.success
+            assert snapshot(workflow.out).match()
         }
 
     }
@@ -231,9 +269,10 @@ nextflow_workflow {
                 input[4] = ['harmony']
                 input[5] = null
                 input[6] = null
-                input[7] = []
+                input[7] = null
                 input[8] = []
-                input[9] = null
+                input[9] = []
+                input[10] = null
                 """
             }
         }
